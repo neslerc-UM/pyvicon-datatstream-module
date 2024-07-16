@@ -235,6 +235,13 @@ class PyViconDatastream:
     def get_camera_name(self, index):
         return datastream_wrapper.pyvicon_get_camera_name(self.client_, index)
 
+    # added by CN and AR, UMich (July 2024)
+    def get_device_value(self, device_name, device_output_name, device_output_component_name):
+        devicereading = datastream_wrapper.pyvicon_get_device_value(self.client_, device_name, device_output_name, device_output_component_name)
+        if devicereading is None:
+            return None
+        return np.array(devicereading)
+    
     @staticmethod
     def check_enum(value, enum, method):
         if not isinstance(value, enum):
